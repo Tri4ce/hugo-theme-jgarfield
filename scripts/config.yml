@@ -1,6 +1,3 @@
-ENVIRONMENT:
-  baseURL: "http://ad18a72f.ngrok.io/"
-
 # Your project's server will run on localhost:xxxx at this port
 PORT: 80
 

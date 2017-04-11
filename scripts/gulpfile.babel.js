@@ -15,7 +15,7 @@
 // 0.1 - Load configuration & path variables
   const $ = plugins();                                                          // Load all Gulp plugins into one variable
   const PRODUCTION = !!(yargs.argv.production);                                 // Check for --production flag
-  var { ENVIRONMENT, COMPATIBILITY, PORT, PATHS } = loadConfig();                            // Load settings from config.yml
+  var { COMPATIBILITY, PORT, PATHS } = loadConfig();                            // Load settings from config.yml
   function loadConfig() {                                                       // Load Config
     let ymlFile = fs.readFileSync('config.yml', 'utf8');
     return yaml.load(ymlFile);
@@ -77,7 +77,7 @@
 
 // 0.6 - Hugo server task
   gulp.task('hugo-server', (code) => {
-    return cp.spawn('hugo', ['server', '-b', ENVIRONMENT.baseURL, '-p', PORT, '-t', THEME.name, '-s',HUGO.root], { stdio: 'inherit' })
+    return cp.spawn('hugo', ['server', '-p', PORT, '-t', THEME.name, '-s',HUGO.root], { stdio: 'inherit' })
       .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
       .on('close', code);
   })

@@ -1,2 +1,6 @@
 - id: home
   translation: "Home"
+
+- id: backToTop
+  translation: "Back to top"
+

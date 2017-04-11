@@ -1,0 +1,14 @@
+<footer class="blog-footer">
+	<div class="row column">
+		<p>
+		{{ if .Site.Copyright }}
+			{{ .Site.Copyright | markdownify }}
+		{{ else }}
+			Foundation v6 Hugo template created by <a href="https://github.com/Tri4ce">Justin Garfield</a>.
+		{{ end }}
+		</p>
+		<p>
+			<a href="{{ .Permalink }}#">{{ i18n "backToTop" }}</a>
+		</p>
+	</div>
+</footer>
