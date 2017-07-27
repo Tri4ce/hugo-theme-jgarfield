@@ -4,3 +4,6 @@
 - id: backToTop
   translation: "Back to top"
 
+- id: recentPosts
+  translation: "Recent Posts"
+  

@@ -1,0 +1,3 @@
+<div class="tabs-panel {{ if .Get "isActive" }} is-active {{ end }}" id="{{ .Parent.Get 0 }}-{{ .Get "title" | urlize }}">
+    {{ .Inner }}
+</div>

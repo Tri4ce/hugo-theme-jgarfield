@@ -1,14 +1,27 @@
-<footer class="blog-footer">
-	<div class="row column">
-		<p>
-		{{ if .Site.Copyright }}
-			{{ .Site.Copyright | markdownify }}
-		{{ else }}
-			Foundation v6 Hugo template created by <a href="https://github.com/Tri4ce">Justin Garfield</a>.
-		{{ end }}
-		</p>
-		<p>
-			<a href="{{ .Permalink }}#">{{ i18n "backToTop" }}</a>
-		</p>
+<footer class="zurb-footer-bottom">
+	<div class="row">
+		<div class="medium-4 medium-push-8 columns">
+			<ul class="home-social">
+				<li><a href="https://www.twitter.com/jgarfield1984"><i class="fi-social-twitter"></i></a></li>
+				<li><a href="https://www.facebook.com/jgarfield1984"><i class="fi-social-facebook"></i></a></li>
+				<li><a href="{{ .Site.BaseURL }}contact"><i class="fi-mail"></i></a></li>
+			</ul>
+		</div>
+		<div class="medium-8 medium-pull-4 columns">
+			<ul class="site-links">
+				<li><a href="{{ .Site.BaseURL }}about">Articles</a></li>
+				<li><a href="{{ .Site.BaseURL }}blog">Projects</a></li>
+				<li><a href="{{ .Site.BaseURL }}news">About</a></li>
+				<li><a href="{{ .Site.BaseURL }}contact">Contact</a></li>
+				<li><a href="{{ .Site.BaseURL }}sitemap">Sitemap</a></li>
+			</ul>
+			<p class="copyright">
+				{{ if .Site.Copyright }}
+					{{ .Site.Copyright | markdownify }}
+				{{ else }}
+					© 2016‐2017 <a href="https://github.com/Tri4ce">Justin Garfield</a>. All rights reserved.
+				{{ end }}
+			</p>
+		</div>
 	</div>
 </footer>

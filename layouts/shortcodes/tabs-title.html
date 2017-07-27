@@ -1,0 +1,3 @@
+<li class="tabs-title {{ if .Get "isActive" }} is-active {{ end }}">
+    <a href="#{{ .Parent.Get 0 }}-{{ .Get "title" | urlize }}" {{ if .Get "isActive" }} aria-selected="true" {{ end }}>{{ .Get "title" }}</a>
+</li>

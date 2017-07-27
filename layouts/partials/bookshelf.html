@@ -1,0 +1,6 @@
+<h4>Book Reading</h4>
+<ul>
+{{ range . }}
+  <li><a href="{{ .url }}" target="_blank">{{ .title }}</a></li>
+{{ end }}
+</ul>

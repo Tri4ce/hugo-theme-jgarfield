@@ -28,5 +28,13 @@
     </ul>
   {{ end }}
 
+  {{ range $.Site.Data.webreading }}
+    {{ partial "recently-read.html" . }}
+  {{ end }}
+
+  {{ range $.Site.Data.bookreading }}
+    {{ partial "bookshelf.html" . }}
+  {{ end }}
+
   </div>
 </div>

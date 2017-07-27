@@ -1,3 +1,4 @@
+<!--
 {{ range . }}
 	<li><a href="{{.URL}}">{{ .Name }}</a>
 	{{ if .HasChildren }}
@@ -15,5 +16,29 @@
 			{{ end }}
 		</ul>
 	{{ end }}
+	</li>
+{{ end }}
+-->
+
+{{ range . }}
+	<li>
+		<a href="{{.URL}}">{{ .Name }}</a>
+
+		{{ if .HasChildren }}
+			<ul class="vertical menu">
+				{{ range .Children }}
+					<li><a href="{{.URL}}">{{ .Name }}</a>
+					{{ if .HasChildren }}
+						<ul class="vertical menu">
+							{{ range .Children }}
+							<li><a href="{{.URL}}">{{ .Name }}</a></li>
+							{{ end }}
+						</ul>
+					{{ end }}
+					</li>
+				{{ end }}
+			</ul>
+		{{ end }}
+
 	</li>
 {{ end }}

@@ -1,6 +1,7 @@
 <header class="nav">
-    <div class="top-bar">
+    <div class="top-bar" id="navigation-menu">
         <div class="row column">
+
             <div class="top-bar-left">
                 <ul class="menu">
                     <li>
@@ -8,50 +9,16 @@
                     </li>
                 </ul>
             </div>
-            <div class="top-bar-right">
-                <ul class="dropdown menu" data-dropdown-menu>
-                    <li class="{{ if .IsHome }}active{{ end }}">
-                        <a href="{{ .Site.BaseURL | absLangURL }}">{{ i18n "home" }}</a>
-                    </li>
-                    <!--
-                    <li>
-                        <a href="/projects">Projects</a>
-                        <ul class="menu">
-                            <li>
-                                <a href="/projects/gaming">Gaming</a>
-                                <ul class="menu">
-                                    <li><a href="https://wow.curseforge.com/projects/blood-of-sargeras-multi-purchase" target="_new">Blood of Sargeras Multi-purchase</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/projects/programming">Programming</a>
-                                <ul class="menu">
-                                    <li><a href="https://github.com/Tri4ce/cppOS" target="_new">cppOS</a></li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a href="/projects/web">Web</a>
-                                <ul class="menu">
-                                    <li><a href="/projects/">jgarfield.com</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
 
-                    <li>
-                        <a href="/about">About</a>
-                        <ul class="menu">
-                            <li><a href="/about/career">My Career</a></li>
-                            <li><a href="/about/technology-profile">My Technology Profile</a></li>
-                            <li><a href="/about/pcs-and-hardware">My PCs / Hardware</a></li>
-                            <li><a href="/about/this-site">This Site</a></li>
-                        </ul>
-                    </li>
-                    
-                    <li><a href="/resources">Resources</a></li>
-                    -->
-					
-					{{ if .Site.Params.UseCustomNavigation }}
+            <div class="top-bar-right">
+
+                <div class="title-bar" data-responsive-toggle="navigation-menu" data-hide-for="medium">
+                    <button class="menu-icon" type="button" data-toggle="navigation-menu"></button>
+                    <div class="title-bar-title">Menu</div>
+                </div>
+
+                <ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
+                    {{ if .Site.Params.UseCustomNavigation }}
 						{{ partial "navigation.html" .Site.Menus.navigation }}
                     {{ else }}
                         {{ range where .Site.Pages "Type" "!=" "post" }}
@@ -60,6 +27,7 @@
                             </li>
                         {{ end }}
                     {{ end }}
+                    
                 </ul>
             </div>
         </div>

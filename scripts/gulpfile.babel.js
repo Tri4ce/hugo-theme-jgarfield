@@ -15,7 +15,7 @@
 // 0.1 - Load configuration & path variables
   const $ = plugins();                                                          // Load all Gulp plugins into one variable
   const PRODUCTION = !!(yargs.argv.production);                                 // Check for --production flag
-  var { COMPATIBILITY, PORT, PATHS } = loadConfig();                            // Load settings from config.yml
+  var { COMPATIBILITY, PORT, PATHS, FOUNDATION_THEME } = loadConfig();          // Load settings from config.yml
   function loadConfig() {                                                       // Load Config
     let ymlFile = fs.readFileSync('config.yml', 'utf8');
     return yaml.load(ymlFile);
@@ -46,7 +46,7 @@
         browsers: COMPATIBILITY
         }))
       .pipe($.if(PRODUCTION, $.cssnano()))                                      // In production, the CSS is compressed
-      .pipe($.if(!PRODUCTION, $.sourcemaps.write()))                            // In production, the CSS is sourcemapped
+      .pipe($.if(!PRODUCTION, $.sourcemaps.write()))                            // In production, the CSS is NOT sourcemapped
       .pipe(gulp.dest( path.join(THEME.static, '/css') ));
   }
 
@@ -77,7 +77,7 @@
 
 // 0.6 - Hugo server task
   gulp.task('hugo-server', (code) => {
-    return cp.spawn('hugo', ['server', '-p', PORT, '-t', THEME.name, '-s',HUGO.root], { stdio: 'inherit' })
+    return cp.spawn('hugo', ['server', '-p', PORT, '-t', THEME.name, '-s',HUGO.root,'--bind','192.168.24.104','--baseURL', '192.168.24.104'], { stdio: 'inherit' })
       .on('error', (error) => gutil.log(gutil.colors.red(error.message)))
       .on('close', code);
   })
@@ -99,9 +99,15 @@
     gulp.watch( THEME.public ).on('all', gulp.series( 'lint' ));
   }
 
+  gulp.task('copy-foundation-icon-fonts', function() {
+    return gulp.src('bower_components/foundation-icon-fonts/foundation-icons.{eot,svg,ttf,woff}')
+      .pipe(gulp.dest( path.join(THEME.static, '/css') ));
+  })
+
 // 1.0 - `Package.json` -> Gulp tasks
-  gulp.task('build', gulp.series( gulp.parallel(sass, javascript) ));           // Build the 'static' folder
+  gulp.task('build', gulp.series( gulp.parallel(sass, javascript, 'copy-foundation-icon-fonts') ));           // Build the 'static' folder
   gulp.task('css', gulp.series( sass ));                                        // Build the 'static' folder
   gulp.task('js', gulp.series( javascript ));                                   // Build the 'static' folder
   gulp.task('public', gulp.series( 'build', clean, 'hugo-build', `lint` ));     // Build the site, run the server, and watch for file changes
   gulp.task('server', gulp.series( 'build', clean, gulp.parallel('hugo-server', watch) ));  // Build the site, run the server, and watch for file changes
+
